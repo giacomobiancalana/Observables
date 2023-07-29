@@ -1,10 +1,24 @@
-import { Observable } from 'rxjs';
 import { interval } from 'rxjs';
+import { map, throttleTime } from 'rxjs/operators';
 
-//TODO: vuoi provare a pubblicarlo??
+let observable = interval(1000);
+let observer = {
+  next: function(el: any) { console.log("value", el) }
+};
 
-console.log("uuu");
+observable.pipe(
+map(function(val) {
+  return "t: " + val;
+}),
+throttleTime(2100)
+).subscribe(observer);
 
-interval(1000).subscribe((uu) => console.log(uu));
+/*
+oppure
+observable.subscribe((value) => console.log("value:", value));
 
-//TODO: da capire perchè non posso fare Observables.interval e come si importa per bene interval
+oppure
+observable.subscribe({
+  next: (value) => console.log("value:", value)
+});
+*/
