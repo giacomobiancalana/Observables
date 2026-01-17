@@ -1,9 +1,9 @@
 import { interval } from 'rxjs';
 import { map, tap, throttleTime } from 'rxjs/operators';
 
-let observable = interval(1000);
-//   ^?
-let observer = {
+const observable = interval(1000);
+//      ^?
+const observer = {
   next: function (el: any) { console.log("value", el) }
 };
 
@@ -13,7 +13,6 @@ observable.pipe(
   }),
   throttleTime(2100),
 ).subscribe(observer);
-// ).subscribe(el => console.log("value", el));
 
 /*
 oppure
